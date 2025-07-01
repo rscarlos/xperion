@@ -1,10 +1,13 @@
 // NuevaOperacion.jsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function NuevaOperacion() {
   const [soles, setSoles] = useState('');
   const [dolares, setDolares] = useState('');
   const tasaVenta = 3.5520;
+
+  const navigate = useNavigate();
 
   const handleSolesChange = (e) => {
     const value = e.target.value;
@@ -27,19 +30,7 @@ export default function NuevaOperacion() {
   };
 
   const handleIniciarOperacion = () => {
-    if (!soles || !dolares) {
-      alert('Por favor, completa los campos de monto en soles y dólares.');
-      return;
-    }
-
-    const check = document.getElementById('declaracion-check');
-    if (!check || !check.checked) {
-      alert('Debes aceptar la declaración jurada para continuar.');
-      return;
-    }
-
-    alert('¡Operación creada con éxito!');
-    // Aquí puedes agregar una redirección o el guardado real de la operación
+    navigate('/dashboard');
   };
 
   return (
@@ -95,7 +86,8 @@ export default function NuevaOperacion() {
 
         <div className="mb-4 text-sm">
           <input id="declaracion-check" type="checkbox" className="mr-2" />
-          Declaro bajo juramento que los fondos involucrados en la operación provienen de actividades lícitas en conformidad con la normativa peruana y las regulaciones de prevención de lavado de activos en el país.
+          Declaro bajo juramento que los fondos involucrados en la operación provienen de actividades lícitas en
+          conformidad con la normativa peruana y las regulaciones de prevención de lavado de activos en el país.
         </div>
 
         <button

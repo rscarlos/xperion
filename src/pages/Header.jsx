@@ -9,7 +9,18 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
+    setMenuOpen(false);
     navigate('/');
+  };
+
+  const handleLogin = () => {
+    setMenuOpen(false);
+    navigate('/login');
+  };
+
+  const handleRegister = () => {
+    setMenuOpen(false);
+    navigate('/register');
   };
 
   return (
@@ -19,11 +30,11 @@ export default function Header() {
           <Link to="/">FintechCambio</Link>
         </div>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {isAuthenticated ? (
             <>
               <Link to="/dashboard" className="hover:text-blue-700">Dashboard</Link>
-              <Link to="/nueva-operacion" className="hover:text-blue-700">Nueva Operación</Link>
               <Link to="/historial" className="hover:text-blue-700">Historial</Link>
               <Link to="/notificaciones" className="hover:text-blue-700">Notificaciones</Link>
               <Link to="/referidos" className="hover:text-blue-700">Referidos</Link>
@@ -44,13 +55,13 @@ export default function Header() {
               <Link to="/nosotros" className="hover:text-blue-700">Nosotros</Link>
 
               <button
-                onClick={() => navigate('/login')}
+                onClick={handleLogin}
                 className="text-blue-700 hover:underline"
               >
                 Ingresar
               </button>
               <button
-                onClick={() => navigate('/login')}
+                onClick={handleRegister}
                 className="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition"
               >
                 Registrarse
@@ -59,6 +70,7 @@ export default function Header() {
           )}
         </div>
 
+        {/* Mobile Button */}
         <div className="md:hidden">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -69,20 +81,18 @@ export default function Header() {
         </div>
       </div>
 
+      {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white px-4 pb-4 space-y-3 shadow">
           {isAuthenticated ? (
             <>
-              <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Dashboard</Link> 
+              <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Dashboard</Link>
               <Link to="/historial" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Historial</Link>
               <Link to="/notificaciones" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Notificaciones</Link>
               <Link to="/referidos" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Referidos</Link>
 
               <button
-                onClick={() => {
-                  handleLogout();
-                  setMenuOpen(false);
-                }}
+                onClick={handleLogout}
                 className="w-full text-blue-700 hover:underline"
               >
                 Cerrar Sesión
@@ -97,19 +107,13 @@ export default function Header() {
               <Link to="/nosotros" onClick={() => setMenuOpen(false)} className="block hover:text-blue-700">Nosotros</Link>
 
               <button
-                onClick={() => {
-                  navigate('/login');
-                  setMenuOpen(false);
-                }}
+                onClick={handleLogin}
                 className="w-full text-blue-700 hover:underline"
               >
                 Ingresar
               </button>
               <button
-                onClick={() => {
-                  navigate('/register');
-                  setMenuOpen(false);
-                }}
+                onClick={handleRegister}
                 className="w-full border border-blue-600 text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-600 hover:text-white transition"
               >
                 Registrarse
